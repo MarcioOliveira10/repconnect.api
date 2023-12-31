@@ -1,0 +1,11 @@
+CREATE TABLE `addresses` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `street` VARCHAR(250),
+    `number` VARCHAR(10),
+    `city` VARCHAR(50),
+    `zip_code` VARCHAR(20),
+    `complement` VARCHAR(250),
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+);
