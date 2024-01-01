@@ -22,7 +22,6 @@ public class AddressController {
     private final CreateAddressUseCase createAddressUseCase;
     private final AddressRepositoryGateway addressRepositoryGateway;
     private final AddressDTOMapper addressDTOMapper;
-
     private final GetAllAddressesUseCase getAllAddressesUseCase;
 
 
@@ -34,14 +33,14 @@ public class AddressController {
     }
 
     @PostMapping
-    public CreateAddressResponse create(@Valid @RequestBody  CreateAddressRequest addressRequest){
+    public CreateAddressResponse create(@Valid @RequestBody CreateAddressRequest addressRequest) {
         Address addressObj = addressDTOMapper.toAddress(addressRequest);
         Address address = createAddressUseCase.createAddress(addressObj);
         return addressDTOMapper.toResponse(address);
     }
 
     @GetMapping
-    public ResponseEntity<List<CreateAddressResponse>> getAllAddresses(){
+    public ResponseEntity<List<CreateAddressResponse>> getAllAddresses() {
         List<Address> addresses = getAllAddressesUseCase.getAllAddresses();
         List<CreateAddressResponse> addressResponseList = addresses.stream()
                 .map(addressDTOMapper::toResponse)

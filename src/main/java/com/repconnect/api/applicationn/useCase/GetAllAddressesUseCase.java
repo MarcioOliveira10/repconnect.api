@@ -2,8 +2,6 @@ package com.repconnect.api.applicationn.useCase;
 
 import com.repconnect.api.applicationn.gateway.IAddressGateway;
 import com.repconnect.api.core.domain.Address;
-
-import java.util.Collection;
 import java.util.List;
 
 public class GetAllAddressesUseCase {
