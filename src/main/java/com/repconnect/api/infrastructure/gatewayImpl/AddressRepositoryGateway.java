@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 
 import com.repconnect.api.applicationn.gateway.IAddressGateway;
 import com.repconnect.api.core.domain.Address;
+import com.repconnect.api.core.exception.EntityAlreadyExistsException;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
 import com.repconnect.api.infrastructure.mapper.AddressEntityMapper;
 import com.repconnect.api.infrastructure.repository.IAddressRepository;
@@ -20,6 +21,9 @@ public class AddressRepositoryGateway implements IAddressGateway {
     @Override
     public Address createAddress(Address address) {
         AddressEntity addressEntity = addressEntityMapper.toEntity(address);
+        if(addressEntity.getId() != null && addressRepository.existsById(addressEntity.getId())){
+            throw new EntityAlreadyExistsException("O ID " + addressEntity.getId() + " já existe na base de dados");
+        }
         AddressEntity savedObj = addressRepository.save(addressEntity);
         return addressEntityMapper.toAddress(savedObj);
     }

@@ -7,6 +7,7 @@ public class AddressEntityMapper {
 
     public AddressEntity toEntity(Address address) {
         return new AddressEntity(
+                address.id(),
                 address.street(),
                 address.number(),
                 address.city(),
