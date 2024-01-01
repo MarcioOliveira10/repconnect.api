@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IAddressGateway;
 import com.repconnect.api.applicationn.useCase.CreateAddressUseCase;
+import com.repconnect.api.applicationn.useCase.GetAllAddressesUseCase;
 import com.repconnect.api.infrastructure.dto.address.AddressDTOMapper;
 import com.repconnect.api.infrastructure.gatewayImpl.AddressRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.AddressEntityMapper;
@@ -11,9 +12,15 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AddressConfig {
+
     @Bean
-    CreateAddressUseCase createAddressUseCase(IAddressGateway IAddressGateway) {
-        return new CreateAddressUseCase(IAddressGateway);
+    GetAllAddressesUseCase getAllAddressesUseCase(IAddressGateway iAddressGateway){
+        return new GetAllAddressesUseCase(iAddressGateway);
+
+    }
+    @Bean
+    CreateAddressUseCase createAddressUseCase(IAddressGateway iAddressGateway) {
+        return new CreateAddressUseCase(iAddressGateway);
     }
 
     @Bean
