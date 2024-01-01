@@ -7,6 +7,9 @@ import com.repconnect.api.infrastructure.entity.InvoiceDataEntity;
 import com.repconnect.api.infrastructure.mapper.InvoiceDataEntityMapper;
 import com.repconnect.api.infrastructure.repository.IInvoiceDataRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
     private final IInvoiceDataRepository invoiceDataRepository;
     private final InvoiceDataEntityMapper invoiceDataEntityMapper;
@@ -23,7 +26,14 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
             throw new EntityAlreadyExistsException("An entity with this code already exists:" + invoiceDataEntity.getCode());
         }
         InvoiceDataEntity savedObj = invoiceDataRepository.save(invoiceDataEntity);
+        return invoiceDataEntityMapper.toInvoiceData(savedObj);
+    }
 
-        return invoiceDataEntityMapper.toDomainObj(savedObj);
+    @Override
+    public List<InvoiceData> getAllInvoiceData() {
+        List<InvoiceDataEntity> invoiceDataEntityList = invoiceDataRepository.findAll();
+        return invoiceDataEntityList.stream()
+                .map(invoiceDataEntityMapper::toInvoiceData)
+                .collect(Collectors.toList());
     }
 }

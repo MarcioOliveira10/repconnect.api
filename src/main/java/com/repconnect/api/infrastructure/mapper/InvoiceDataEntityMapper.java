@@ -4,7 +4,7 @@ import com.repconnect.api.core.domain.InvoiceData;
 import com.repconnect.api.infrastructure.entity.InvoiceDataEntity;
 
 public class InvoiceDataEntityMapper {
-   public InvoiceDataEntity toEntity(InvoiceData invoiceDataDomainObj){
+    public InvoiceDataEntity toEntity(InvoiceData invoiceDataDomainObj) {
         return new InvoiceDataEntity(
                 invoiceDataDomainObj.code(),
                 invoiceDataDomainObj.pdfLink(),
@@ -13,7 +13,7 @@ public class InvoiceDataEntityMapper {
                 invoiceDataDomainObj.updatedAt());
     }
 
-    public InvoiceData toDomainObj(InvoiceDataEntity invoiceDataEntity){
+    public InvoiceData toInvoiceData(InvoiceDataEntity invoiceDataEntity) {
         return new InvoiceData(
                 invoiceDataEntity.getId(),
                 invoiceDataEntity.getCode(),

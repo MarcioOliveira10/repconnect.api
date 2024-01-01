@@ -8,5 +8,5 @@ import java.util.List;
 public interface IPhoneGateway {
     Phone createPhone(Phone phone);
 
-    public List<Phone> getAllPhones();
+     List<Phone> getAllPhones();
 }
