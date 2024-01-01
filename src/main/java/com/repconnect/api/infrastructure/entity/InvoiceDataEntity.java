@@ -21,8 +21,8 @@ public class InvoiceDataEntity {
         this.code= code;
         this.pdfLink = pdfLink;
         this.excelLink = excelLink;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public InvoiceDataEntity(String code, String pdfLink, String excelLink, LocalDateTime createdAt, LocalDateTime updatedAt) {

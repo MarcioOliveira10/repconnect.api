@@ -26,8 +26,8 @@ public class PhoneEntity {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.name = name;
-        this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.createdAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
     }
 
     public PhoneEntity(String phoneNumber, String name, LocalDateTime createdAt, LocalDateTime updateAt) {

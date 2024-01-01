@@ -6,8 +6,9 @@ import com.repconnect.api.infrastructure.entity.PhoneEntity;
 public class PhoneEntityMapper {
     public PhoneEntity toEntity(Phone phone){
         return new PhoneEntity(
+                phone.id(),
                 phone.phoneNumber(),
-                phone.phoneNumber(),
+                phone.name(),
                 phone.createdAt(),
                 phone.updatedAt()
                 );
