@@ -3,11 +3,13 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
 import com.repconnect.api.core.domain.InvoiceData;
 import com.repconnect.api.core.exception.EntityAlreadyExistsException;
+import com.repconnect.api.core.exception.EntityNotFoundExceptions;
 import com.repconnect.api.infrastructure.entity.InvoiceDataEntity;
 import com.repconnect.api.infrastructure.mapper.InvoiceDataEntityMapper;
 import com.repconnect.api.infrastructure.repository.IInvoiceDataRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
@@ -22,7 +24,7 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
     @Override
     public InvoiceData createInvoiceData(InvoiceData invoiceDomainObj) {
         InvoiceDataEntity invoiceDataEntity = invoiceDataEntityMapper.toEntity(invoiceDomainObj);
-        if (invoiceDataEntity.getCode() != null && invoiceDataRepository.findByCode(invoiceDataEntity.getCode()).isPresent()){
+        if (invoiceDataEntity.getCode() != null && invoiceDataRepository.findByCode(invoiceDataEntity.getCode()).isPresent()) {
             throw new EntityAlreadyExistsException("An entity with this code already exists:" + invoiceDataEntity.getCode());
         }
         InvoiceDataEntity savedObj = invoiceDataRepository.save(invoiceDataEntity);
@@ -36,4 +38,17 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
                 .map(invoiceDataEntityMapper::toInvoiceData)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public InvoiceData findByCode(String code) {
+        Optional<InvoiceDataEntity> invoiceDataEntityOp = invoiceDataRepository.findByCode(code);
+        if (invoiceDataEntityOp.isPresent()) {
+            InvoiceData invoiceData = invoiceDataEntityMapper.toInvoiceData(invoiceDataEntityOp.get());
+            return invoiceData;
+        } else {
+            throw new EntityNotFoundExceptions("Entidade não encontrada"  );
+        }
+    }
+
+
 }

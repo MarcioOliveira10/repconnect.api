@@ -9,4 +9,5 @@ public interface IInvoiceDataGateway {
     List<InvoiceData> getAllInvoiceData();
 
 
+    InvoiceData findByCode(String code);
 }
