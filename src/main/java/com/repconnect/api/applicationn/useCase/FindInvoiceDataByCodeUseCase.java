@@ -3,11 +3,11 @@ package com.repconnect.api.applicationn.useCase;
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
 import com.repconnect.api.core.domain.InvoiceData;
 
-public class FindInvoiceDataByCode {
+public class FindInvoiceDataByCodeUseCase {
 
     private IInvoiceDataGateway iInvoiceDataGateway;
 
-    public FindInvoiceDataByCode(IInvoiceDataGateway iInvoiceDataGateway) {
+    public FindInvoiceDataByCodeUseCase(IInvoiceDataGateway iInvoiceDataGateway) {
         this.iInvoiceDataGateway = iInvoiceDataGateway;
     }
 

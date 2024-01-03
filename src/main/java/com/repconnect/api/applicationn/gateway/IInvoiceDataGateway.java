@@ -10,4 +10,6 @@ public interface IInvoiceDataGateway {
 
 
     InvoiceData findByCode(String code);
+
+    InvoiceData updateInvoiceData(InvoiceData invoiceData);
 }

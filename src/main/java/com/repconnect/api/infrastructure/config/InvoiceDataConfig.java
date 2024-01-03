@@ -2,8 +2,9 @@ package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
 import com.repconnect.api.applicationn.useCase.CreateInvoiceDataUseCase;
-import com.repconnect.api.applicationn.useCase.FindInvoiceDataByCode;
+import com.repconnect.api.applicationn.useCase.FindInvoiceDataByCodeUseCase;
 import com.repconnect.api.applicationn.useCase.GetAllInvoiceDataUseCase;
+import com.repconnect.api.applicationn.useCase.UpdateInvoiceDataUseCase;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataDTOMapper;
 import com.repconnect.api.infrastructure.gatewayImpl.InvoiceDataRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.InvoiceDataEntityMapper;
@@ -13,9 +14,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InvoiceDataConfig {
+
     @Bean
-    FindInvoiceDataByCode findInvoiceDataByCode(IInvoiceDataGateway iInvoiceDataGateway){
-        return new FindInvoiceDataByCode(iInvoiceDataGateway);
+    UpdateInvoiceDataUseCase updateInvoiceDataUseCase(IInvoiceDataGateway invoiceDataGateway){
+        return new UpdateInvoiceDataUseCase(invoiceDataGateway);
+    }
+    @Bean
+    FindInvoiceDataByCodeUseCase findInvoiceDataByCode(IInvoiceDataGateway iInvoiceDataGateway){
+        return new FindInvoiceDataByCodeUseCase(iInvoiceDataGateway);
     }
     @Bean
     GetAllInvoiceDataUseCase getAllInvoiceDataUseCase(IInvoiceDataGateway iInvoiceDataGateway){
