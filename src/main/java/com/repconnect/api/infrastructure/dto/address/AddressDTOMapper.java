@@ -4,8 +4,8 @@ import com.repconnect.api.core.domain.Address;
 
 public class AddressDTOMapper {
 
-    public CreateAddressResponse toResponse(Address address){
-        return new CreateAddressResponse(
+    public AddressResponse toResponse(Address address){
+        return new AddressResponse(
                 address.street(),
                 address.number(),
                 address.city(),
@@ -14,7 +14,7 @@ public class AddressDTOMapper {
                 address.createdAt());
     }
 
-    public Address toAddress(CreateAddressRequest request){
+    public Address toAddress(AddressRequest request){
         return new Address(
                 request.id(),
                 request.street(),

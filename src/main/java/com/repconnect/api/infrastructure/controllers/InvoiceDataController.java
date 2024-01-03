@@ -5,8 +5,8 @@ import com.repconnect.api.applicationn.useCase.FindInvoiceDataByCodeUseCase;
 import com.repconnect.api.applicationn.useCase.GetAllInvoiceDataUseCase;
 import com.repconnect.api.applicationn.useCase.UpdateInvoiceDataUseCase;
 import com.repconnect.api.core.domain.InvoiceData;
-import com.repconnect.api.infrastructure.dto.invoiceData.CreateInvoiceDataRequest;
-import com.repconnect.api.infrastructure.dto.invoiceData.CreateInvoiceDataResponse;
+import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataRequest;
+import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataResponse;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataDTOMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,16 +34,16 @@ public class InvoiceDataController {
     }
 
     @PostMapping
-    public CreateInvoiceDataResponse create(@RequestBody CreateInvoiceDataRequest invoiceDataRequest){
+    public InvoiceDataResponse create(@RequestBody InvoiceDataRequest invoiceDataRequest){
         InvoiceData invoiceDataBusinessObj = invoiceDataDTOMapper.toInvoiceData(invoiceDataRequest);
         InvoiceData invoiceData = createInvoiceDataUseCase.createInvoiceData(invoiceDataBusinessObj);
         return invoiceDataDTOMapper.toResponse(invoiceData);
     }
 
     @GetMapping
-    public ResponseEntity<List<CreateInvoiceDataResponse>> getAllInvoiceData(){
+    public ResponseEntity<List<InvoiceDataResponse>> getAllInvoiceData(){
         List<InvoiceData> invoiceDataList = getAllInvoiceDataUseCase.getAllInvoiceData();
-        List<CreateInvoiceDataResponse> invoiceDataResponseList = invoiceDataList.stream()
+        List<InvoiceDataResponse> invoiceDataResponseList = invoiceDataList.stream()
                 .map(invoiceDataDTOMapper::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(invoiceDataResponseList);
@@ -51,15 +51,15 @@ public class InvoiceDataController {
     @GetMapping("/{code}")
     public ResponseEntity<Object> getInvoiceDataByCode(@PathVariable String code){
             InvoiceData invoiceData = findInvoiceDataByCodeUseCase.findByCode(code);
-            CreateInvoiceDataResponse invoiceDataResponse = invoiceDataDTOMapper.toResponse(invoiceData);
+            InvoiceDataResponse invoiceDataResponse = invoiceDataDTOMapper.toResponse(invoiceData);
             return new ResponseEntity<>(invoiceDataResponse,HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<CreateInvoiceDataResponse> updateInvoiceData(@RequestBody CreateInvoiceDataRequest invoiceDataRequest){
+    public ResponseEntity<InvoiceDataResponse> updateInvoiceData(@RequestBody InvoiceDataRequest invoiceDataRequest){
         InvoiceData invoiceDataBusinessObj = invoiceDataDTOMapper.toInvoiceData(invoiceDataRequest);
         InvoiceData invoiceData = updateInvoiceDataUseCase.updateInvoiceData(invoiceDataBusinessObj);
-        CreateInvoiceDataResponse invoiceDataResponse = invoiceDataDTOMapper.toResponse(invoiceData);
+        InvoiceDataResponse invoiceDataResponse = invoiceDataDTOMapper.toResponse(invoiceData);
         return new ResponseEntity<>(invoiceDataResponse,HttpStatus.OK);
 
     }
