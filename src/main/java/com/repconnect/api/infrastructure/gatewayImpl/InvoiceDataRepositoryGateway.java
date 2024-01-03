@@ -62,5 +62,16 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
         }
     }
 
+    @Override
+    public void deleteByCode(String code) {
+        Optional<InvoiceDataEntity> invoiceDataEntityOp = invoiceDataRepository.findByCode(code);
+        if (invoiceDataEntityOp.isPresent()){
+            invoiceDataRepository.deleteByCode(code);
+        }else {
+            throw new EntityNotFoundExceptions("Não existe entidade com o codigo: " + code);
+        }
+
+    }
+
 
 }

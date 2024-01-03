@@ -1,10 +1,7 @@
 package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
-import com.repconnect.api.applicationn.useCase.CreateInvoiceDataUseCase;
-import com.repconnect.api.applicationn.useCase.FindInvoiceDataByCodeUseCase;
-import com.repconnect.api.applicationn.useCase.GetAllInvoiceDataUseCase;
-import com.repconnect.api.applicationn.useCase.UpdateInvoiceDataUseCase;
+import com.repconnect.api.applicationn.useCase.*;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataDTOMapper;
 import com.repconnect.api.infrastructure.gatewayImpl.InvoiceDataRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.InvoiceDataEntityMapper;
@@ -14,10 +11,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InvoiceDataConfig {
+    @Bean
+    DeleteInvoiceDataUseCase deleteInvoiceDataUseCase(IInvoiceDataGateway iInvoiceDataGateway){
+        return new DeleteInvoiceDataUseCase(iInvoiceDataGateway);
+    }
 
     @Bean
-    UpdateInvoiceDataUseCase updateInvoiceDataUseCase(IInvoiceDataGateway invoiceDataGateway){
-        return new UpdateInvoiceDataUseCase(invoiceDataGateway);
+    UpdateInvoiceDataUseCase updateInvoiceDataUseCase(IInvoiceDataGateway iInvoiceDataGateway){
+        return new UpdateInvoiceDataUseCase(iInvoiceDataGateway);
     }
     @Bean
     FindInvoiceDataByCodeUseCase findInvoiceDataByCode(IInvoiceDataGateway iInvoiceDataGateway){
@@ -28,12 +29,12 @@ public class InvoiceDataConfig {
         return new GetAllInvoiceDataUseCase(iInvoiceDataGateway);
     }
     @Bean
-    CreateInvoiceDataUseCase createInvoiceDataUseCase(IInvoiceDataGateway IInvoiceDataGateway){
-        return new CreateInvoiceDataUseCase(IInvoiceDataGateway);
+    CreateInvoiceDataUseCase createInvoiceDataUseCase(IInvoiceDataGateway iInvoiceDataGateway){
+        return new CreateInvoiceDataUseCase(iInvoiceDataGateway);
     }
     @Bean
-    IInvoiceDataGateway invoiceDataGateway(IInvoiceDataRepository IInvoiceDataRepository, InvoiceDataEntityMapper invoiceDataEntityMapper){
-        return new InvoiceDataRepositoryGateway(IInvoiceDataRepository, invoiceDataEntityMapper);
+    IInvoiceDataGateway invoiceDataGateway(IInvoiceDataRepository iInvoiceDataRepository, InvoiceDataEntityMapper invoiceDataEntityMapper){
+        return new InvoiceDataRepositoryGateway(iInvoiceDataRepository, invoiceDataEntityMapper);
     }
     @Bean
     InvoiceDataEntityMapper invoiceDataEntityMapper(){

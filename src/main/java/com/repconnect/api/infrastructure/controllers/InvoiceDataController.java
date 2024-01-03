@@ -1,9 +1,6 @@
 package com.repconnect.api.infrastructure.controllers;
 
-import com.repconnect.api.applicationn.useCase.CreateInvoiceDataUseCase;
-import com.repconnect.api.applicationn.useCase.FindInvoiceDataByCodeUseCase;
-import com.repconnect.api.applicationn.useCase.GetAllInvoiceDataUseCase;
-import com.repconnect.api.applicationn.useCase.UpdateInvoiceDataUseCase;
+import com.repconnect.api.applicationn.useCase.*;
 import com.repconnect.api.core.domain.InvoiceData;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataRequest;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataResponse;
@@ -24,13 +21,15 @@ public class InvoiceDataController {
     private final GetAllInvoiceDataUseCase getAllInvoiceDataUseCase;
     private final FindInvoiceDataByCodeUseCase findInvoiceDataByCodeUseCase;
     private final UpdateInvoiceDataUseCase updateInvoiceDataUseCase;
+    private final DeleteInvoiceDataUseCase deleteInvoiceDataUseCase;
 
-    public InvoiceDataController(CreateInvoiceDataUseCase createInvoiceDataUseCase, InvoiceDataDTOMapper invoiceDataDTOMapper, GetAllInvoiceDataUseCase getAllInvoiceDataUseCase, FindInvoiceDataByCodeUseCase findInvoiceDataByCodeUseCase, UpdateInvoiceDataUseCase updateInvoiceDataUseCase) {
+    public InvoiceDataController(CreateInvoiceDataUseCase createInvoiceDataUseCase, InvoiceDataDTOMapper invoiceDataDTOMapper, GetAllInvoiceDataUseCase getAllInvoiceDataUseCase, FindInvoiceDataByCodeUseCase findInvoiceDataByCodeUseCase, UpdateInvoiceDataUseCase updateInvoiceDataUseCase, DeleteInvoiceDataUseCase deleteInvoiceDataUseCase) {
         this.createInvoiceDataUseCase = createInvoiceDataUseCase;
         this.invoiceDataDTOMapper = invoiceDataDTOMapper;
         this.getAllInvoiceDataUseCase = getAllInvoiceDataUseCase;
         this.findInvoiceDataByCodeUseCase = findInvoiceDataByCodeUseCase;
         this.updateInvoiceDataUseCase = updateInvoiceDataUseCase;
+        this.deleteInvoiceDataUseCase = deleteInvoiceDataUseCase;
     }
 
     @PostMapping
@@ -61,13 +60,11 @@ public class InvoiceDataController {
         InvoiceData invoiceData = updateInvoiceDataUseCase.updateInvoiceData(invoiceDataBusinessObj);
         InvoiceDataResponse invoiceDataResponse = invoiceDataDTOMapper.toResponse(invoiceData);
         return new ResponseEntity<>(invoiceDataResponse,HttpStatus.OK);
-
     }
-
-
-
-
-
-
+    @DeleteMapping("/{code}")
+    public ResponseEntity<Object> deleteInvoiceData(@PathVariable String code){
+        deleteInvoiceDataUseCase.deleteInvoiceData(code);
+        return ResponseEntity.status(HttpStatus.OK).body("InvoiceData deleted successfully.");
+    }
 
 }
