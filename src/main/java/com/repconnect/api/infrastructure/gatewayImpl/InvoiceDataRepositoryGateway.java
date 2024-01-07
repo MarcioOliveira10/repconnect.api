@@ -51,12 +51,15 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
     }
 
     @Override
-    public InvoiceData updateInvoiceData(InvoiceData invoiceData) {
+    public InvoiceData updateInvoiceData(InvoiceData invoiceData) { // Atualiza pelo "code".
         Optional<InvoiceDataEntity> invoiceDataEntityOp = invoiceDataRepository.findByCode(invoiceData.code());
         if(invoiceDataEntityOp.isPresent()){
-            InvoiceDataEntity invoiceDataEntity = invoiceDataEntityMapper.toEntity(invoiceData);
-            InvoiceDataEntity invoiceDataSaved = invoiceDataRepository.save(invoiceDataEntity);
-            return invoiceDataEntityMapper.toInvoiceData(invoiceDataSaved);
+            InvoiceDataEntity existingInvoiceDataEntity = invoiceDataEntityOp.get();
+            existingInvoiceDataEntity.setCode(invoiceData.code());
+            existingInvoiceDataEntity.setPdfLink(invoiceData.pdfLink());
+            existingInvoiceDataEntity.setExcelLink(invoiceData.excelLink());
+            InvoiceDataEntity updateInvoiceDataEntity = invoiceDataRepository.save(existingInvoiceDataEntity);
+            return invoiceDataEntityMapper.toInvoiceData(updateInvoiceDataEntity);
         }else {
             throw new EntityNotFoundExceptions("Entidade não encontrada");
         }

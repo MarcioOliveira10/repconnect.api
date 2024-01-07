@@ -7,6 +7,7 @@ public class InvoiceDataDTOMapper {
 
     public InvoiceDataResponse toResponse(InvoiceData invoiceData){ //pega uma obejeto de dominio e converte em uma resposta.
         return  new InvoiceDataResponse(
+                invoiceData.id(),
                 invoiceData.code(),
                 invoiceData.pdfLink(),
                 invoiceData.excelLink(),
