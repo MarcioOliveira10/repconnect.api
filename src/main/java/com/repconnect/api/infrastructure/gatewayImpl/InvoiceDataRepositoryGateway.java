@@ -66,6 +66,28 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
     }
 
     @Override
+    public InvoiceData updateInvoiceDataById(InvoiceData invoiceData) {// Atualiza pelo "id".
+        try{
+            Optional <InvoiceDataEntity> invoiceDataEntityOp = invoiceDataRepository.findById(invoiceData.id());
+            if (invoiceDataEntityOp.isPresent()){
+                InvoiceDataEntity existingInvoiceDataEntity = invoiceDataEntityOp.get();
+                existingInvoiceDataEntity.setId(invoiceData.id());
+                existingInvoiceDataEntity.setCode(invoiceData.code());
+                existingInvoiceDataEntity.setPdfLink(invoiceData.pdfLink());
+                existingInvoiceDataEntity.setExcelLink(invoiceData.excelLink());
+
+                InvoiceDataEntity updateInvoiceDataEntity = invoiceDataRepository.save(existingInvoiceDataEntity);
+                return invoiceDataEntityMapper.toInvoiceData(updateInvoiceDataEntity);
+            }else {
+                throw new EntityNotFoundExceptions("Entidade: " + invoiceData.id() + "não encontrada");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new IllegalArgumentException("The given ID must not be null");
+        }
+    }
+
+    @Override
     public void deleteByCode(String code) {
         Optional<InvoiceDataEntity> invoiceDataEntityOp = invoiceDataRepository.findByCode(code);
         if (invoiceDataEntityOp.isPresent()){
@@ -75,6 +97,8 @@ public class InvoiceDataRepositoryGateway implements IInvoiceDataGateway {
         }
 
     }
+
+
 
 
 }

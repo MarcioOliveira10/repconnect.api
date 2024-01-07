@@ -16,4 +16,6 @@ public interface IInvoiceDataGateway {
 
 
     void deleteByCode(String code);
+
+    InvoiceData updateInvoiceDataById(InvoiceData invoiceData);
 }

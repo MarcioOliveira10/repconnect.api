@@ -50,13 +50,25 @@ public class ApplicationControllerAdvice {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
+
     @ExceptionHandler(EntityNotFoundExceptions.class)
     public ResponseEntity<ErrorMessage> entityNotFoundExceptions(EntityNotFoundExceptions ex,
-                                                                 HttpServletRequest request){
+                                                                 HttpServletRequest request) {
         log.error("Api Error - ex");
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
+
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorMessage> illegalArgumentException(IllegalArgumentException ex,
+                                                                 HttpServletRequest request
+    ) {
+        log.error("Api Error - ex");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
 
     }
 }

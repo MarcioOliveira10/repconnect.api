@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class InvoiceDataConfig {
     @Bean
+    UpdateInvoiceDataByIdUseCase updateInvoiceDataByIdUseCase(IInvoiceDataGateway iInvoiceDataGateway){
+        return new UpdateInvoiceDataByIdUseCase(iInvoiceDataGateway);
+    }
+    @Bean
     DeleteInvoiceDataUseCase deleteInvoiceDataUseCase(IInvoiceDataGateway iInvoiceDataGateway){
         return new DeleteInvoiceDataUseCase(iInvoiceDataGateway);
     }
