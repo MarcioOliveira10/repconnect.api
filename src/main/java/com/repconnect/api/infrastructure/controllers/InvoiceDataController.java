@@ -1,13 +1,11 @@
 package com.repconnect.api.infrastructure.controllers;
 
-import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
-import com.repconnect.api.applicationn.useCase.*;
+import com.repconnect.api.applicationn.useCase.invoiceData.*;
 import com.repconnect.api.core.domain.InvoiceData;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataRequest;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataResponse;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataDTOMapper;
 import com.repconnect.api.infrastructure.entity.InvoiceDataEntity;
-import com.repconnect.api.infrastructure.gatewayImpl.InvoiceDataRepositoryGateway;
 import com.repconnect.api.infrastructure.repository.IInvoiceDataRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
-import com.repconnect.api.applicationn.useCase.*;
+import com.repconnect.api.applicationn.useCase.invoiceData.*;
 import com.repconnect.api.infrastructure.dto.invoiceData.InvoiceDataDTOMapper;
 import com.repconnect.api.infrastructure.gatewayImpl.InvoiceDataRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.InvoiceDataEntityMapper;

@@ -1,4 +1,4 @@
-package com.repconnect.api.applicationn.useCase;
+package com.repconnect.api.applicationn.useCase.phone;
 
 import com.repconnect.api.applicationn.gateway.IPhoneGateway;
 import com.repconnect.api.core.domain.Phone;

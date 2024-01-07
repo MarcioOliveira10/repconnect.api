@@ -1,10 +1,8 @@
 package com.repconnect.api.infrastructure.config;
 
-import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
 import com.repconnect.api.applicationn.gateway.IPhoneGateway;
-import com.repconnect.api.applicationn.useCase.CreatePhoneUseCase;
-import com.repconnect.api.applicationn.useCase.GetAllPhonesUseCase;
-import com.repconnect.api.applicationn.useCase.UpdateInvoiceDataUseCase;
+import com.repconnect.api.applicationn.useCase.phone.CreatePhoneUseCase;
+import com.repconnect.api.applicationn.useCase.phone.GetAllPhonesUseCase;
 import com.repconnect.api.infrastructure.dto.phone.PhoneDTOMapper;
 import com.repconnect.api.infrastructure.gatewayImpl.PhoneRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.PhoneEntityMapper;

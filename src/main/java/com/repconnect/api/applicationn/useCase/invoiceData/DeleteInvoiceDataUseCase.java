@@ -1,4 +1,4 @@
-package com.repconnect.api.applicationn.useCase;
+package com.repconnect.api.applicationn.useCase.invoiceData;
 
 import com.repconnect.api.applicationn.gateway.IInvoiceDataGateway;
 import com.repconnect.api.core.domain.InvoiceData;

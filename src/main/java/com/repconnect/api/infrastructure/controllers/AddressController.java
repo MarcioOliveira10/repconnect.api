@@ -1,7 +1,7 @@
 package com.repconnect.api.infrastructure.controllers;
 
-import com.repconnect.api.applicationn.useCase.CreateAddressUseCase;
-import com.repconnect.api.applicationn.useCase.GetAllAddressesUseCase;
+import com.repconnect.api.applicationn.useCase.address.CreateAddressUseCase;
+import com.repconnect.api.applicationn.useCase.address.GetAllAddressesUseCase;
 import com.repconnect.api.core.domain.Address;
 import com.repconnect.api.infrastructure.dto.address.AddressDTOMapper;
 import com.repconnect.api.infrastructure.dto.address.AddressRequest;

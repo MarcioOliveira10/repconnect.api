@@ -1,4 +1,4 @@
-package com.repconnect.api.applicationn.useCase;
+package com.repconnect.api.applicationn.useCase.address;
 
 import com.repconnect.api.applicationn.gateway.IAddressGateway;
 import com.repconnect.api.core.domain.Address;

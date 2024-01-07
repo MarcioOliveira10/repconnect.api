@@ -1,7 +1,7 @@
 package com.repconnect.api.infrastructure.controllers;
 
-import com.repconnect.api.applicationn.useCase.CreatePhoneUseCase;
-import com.repconnect.api.applicationn.useCase.GetAllPhonesUseCase;
+import com.repconnect.api.applicationn.useCase.phone.CreatePhoneUseCase;
+import com.repconnect.api.applicationn.useCase.phone.GetAllPhonesUseCase;
 import com.repconnect.api.core.domain.Phone;
 import com.repconnect.api.infrastructure.dto.phone.PhoneRequest;
 import com.repconnect.api.infrastructure.dto.phone.PhoneResponse;
