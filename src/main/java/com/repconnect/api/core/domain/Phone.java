@@ -6,6 +6,7 @@ public record Phone(
         Integer id,
         String phoneNumber,
         String name,
+        Represented represented,
         LocalDateTime createdAt,
         LocalDateTime updatedAt) {
 }

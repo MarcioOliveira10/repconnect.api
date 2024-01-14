@@ -3,6 +3,7 @@ package com.repconnect.api.infrastructure.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 @Entity
 @Table(name = "addresses")
@@ -16,6 +17,7 @@ public class AddressEntity {
     @Column(name="zip_code")
     private String zipCode;
     private String complement;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -43,6 +45,11 @@ public class AddressEntity {
         this.complement = complement;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+    @PrePersist
+    protected void OnCreate(){
+        createdAt= LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     public AddressEntity() {

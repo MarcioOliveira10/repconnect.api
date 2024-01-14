@@ -15,6 +15,7 @@ public class PhoneDTOMapper {
                 request.id(),
                 request.phoneNumber(),
                 request.name(),
+                request.represented(),
                 request.createdAt(),
                 request.updatedAt()
                 );

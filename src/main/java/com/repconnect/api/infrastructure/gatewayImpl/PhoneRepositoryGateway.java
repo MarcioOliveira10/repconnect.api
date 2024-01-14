@@ -6,6 +6,7 @@ import com.repconnect.api.core.exception.EntityAlreadyExistsException;
 import com.repconnect.api.infrastructure.entity.PhoneEntity;
 import com.repconnect.api.infrastructure.mapper.PhoneEntityMapper;
 import com.repconnect.api.infrastructure.repository.IPhoneRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,14 @@ public class PhoneRepositoryGateway implements IPhoneGateway {
         }
         PhoneEntity phoneEntitySaved = phoneRepository.save(phoneEntity);
         return phoneEntityMapper.toPhone(phoneEntitySaved);
+    }
+    @Transactional
+    public List<PhoneEntity> saveAllPhoneList(List<PhoneEntity> phoneEntityList){
+        try{
+            return phoneRepository.saveAll(phoneEntityList);
+        }catch (Exception e){
+            throw new RuntimeException("Erro ao salvar a lista de phones", e);
+        }
     }
 
     @Override
