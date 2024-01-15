@@ -3,15 +3,12 @@ package com.repconnect.api.infrastructure.config;
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
-import com.repconnect.api.infrastructure.controllers.RepresentedController;
 import com.repconnect.api.infrastructure.dto.represented.RepresentedDTOMapper;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
 import com.repconnect.api.infrastructure.gatewayImpl.PhoneRepositoryGateway;
 import com.repconnect.api.infrastructure.gatewayImpl.RepresentedRepositoryGateway;
 import com.repconnect.api.infrastructure.mapper.PhoneEntityMapper;
-import com.repconnect.api.infrastructure.mapper.RepresentedEntityMapper;
 import com.repconnect.api.infrastructure.repository.IRepresentedRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,13 +28,10 @@ public class RepresentedConfig {
     @Bean
     IRepresentedGateway iRepresentedGateway(
             IRepresentedRepository iRepresentedRepository,
-            RepresentedEntityMapper representedEntityMapper,
             PhoneRepositoryGateway phoneRepositoryGateway,
             PhoneEntityMapper phoneEntityMapper){
-        return new RepresentedRepositoryGateway(iRepresentedRepository,representedEntityMapper, phoneRepositoryGateway, phoneEntityMapper);
+        return new RepresentedRepositoryGateway(iRepresentedRepository,phoneRepositoryGateway, phoneEntityMapper);
     }
-    @Bean
-    RepresentedEntityMapper representedEntityMapper(ModelMapper modelMapper){return new RepresentedEntityMapper(modelMapper);}
     @Bean
    RepresentedDTOMapper representedDTOMapper(){return new RepresentedDTOMapper();}
 }

@@ -59,6 +59,12 @@ public class RepresentedEntity {
         this.updatedAt = LocalDateTime.now();
     }
 
+    @PrePersist
+    protected void OnCreate(){
+        createdAt= LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

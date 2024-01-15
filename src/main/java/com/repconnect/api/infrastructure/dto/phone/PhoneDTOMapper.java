@@ -7,7 +7,8 @@ public class PhoneDTOMapper {
         return new PhoneResponse(
                 phone.phoneNumber(),
                 phone.name(),
-                phone.createdAt());
+                phone.createdAt(),
+                phone.updatedAt());
     }
 
     public Phone toPhone(PhoneRequest request){
