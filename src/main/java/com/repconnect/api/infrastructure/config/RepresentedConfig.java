@@ -11,6 +11,7 @@ import com.repconnect.api.infrastructure.gatewayImpl.RepresentedRepositoryGatewa
 import com.repconnect.api.infrastructure.mapper.PhoneEntityMapper;
 import com.repconnect.api.infrastructure.mapper.RepresentedEntityMapper;
 import com.repconnect.api.infrastructure.repository.IRepresentedRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,7 +37,7 @@ public class RepresentedConfig {
         return new RepresentedRepositoryGateway(iRepresentedRepository,representedEntityMapper, phoneRepositoryGateway, phoneEntityMapper);
     }
     @Bean
-    RepresentedEntityMapper representedEntityMapper(){return new RepresentedEntityMapper();}
+    RepresentedEntityMapper representedEntityMapper(ModelMapper modelMapper){return new RepresentedEntityMapper(modelMapper);}
     @Bean
    RepresentedDTOMapper representedDTOMapper(){return new RepresentedDTOMapper();}
 }
