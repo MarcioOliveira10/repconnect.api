@@ -1,31 +1,21 @@
 package com.repconnect.api.infrastructure.dto.represented;
 
 import com.repconnect.api.core.domain.Represented;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.factory.Mappers;
 
-public class RepresentedDTOMapper {
+@Mapper(componentModel = "spring",  nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public abstract class RepresentedDTOMapper {
 
-    public RepresentedResponse toResponse(Represented represented){
-        return new RepresentedResponse(
-                represented.name(),
-                represented.webSite(),
-                represented.email(),
-                represented.address(),
-                represented.phones(),
-                represented.createdAt(),
-                represented.updatedAt()
-        );
-    }
+    public static final RepresentedDTOMapper INSTANCE = Mappers.getMapper(RepresentedDTOMapper.class);
 
-    public Represented toRepresented(RepresentedRequest request){
-        return new Represented(
-                request.id(),
-                request.name(),
-                request.webSite(),
-                request.email(),
-                request.address(),
-                request.phones(),
-                request.createdAt(),
-                request.updatedAt()
-        );
-    }
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    public abstract RepresentedResponse toResponse(Represented represented);
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    public abstract  Represented toRepresented(RepresentedRequest request);
+
 }

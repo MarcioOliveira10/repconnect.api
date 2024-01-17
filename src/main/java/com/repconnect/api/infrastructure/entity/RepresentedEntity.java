@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -44,8 +45,8 @@ public class RepresentedEntity {
         this.email = email;
         this.address = address;
         this.phones = phones;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public RepresentedEntity(Integer id, String name, String webSite, String email, AddressEntity address, List<PhoneEntity> phones, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -55,8 +56,8 @@ public class RepresentedEntity {
         this.email = email;
         this.address = address;
         this.phones = phones;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     @PrePersist

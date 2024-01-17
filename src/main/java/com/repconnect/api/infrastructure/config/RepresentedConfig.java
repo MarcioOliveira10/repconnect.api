@@ -3,7 +3,6 @@ package com.repconnect.api.infrastructure.config;
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
-import com.repconnect.api.infrastructure.dto.represented.RepresentedDTOMapper;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
 import com.repconnect.api.infrastructure.gatewayImpl.PhoneRepositoryGateway;
 import com.repconnect.api.infrastructure.gatewayImpl.RepresentedRepositoryGateway;
@@ -32,6 +31,6 @@ public class RepresentedConfig {
             PhoneEntityMapper phoneEntityMapper){
         return new RepresentedRepositoryGateway(iRepresentedRepository,phoneRepositoryGateway, phoneEntityMapper);
     }
-    @Bean
-   RepresentedDTOMapper representedDTOMapper(){return new RepresentedDTOMapper();}
+   /* @Bean
+   RepresentedDTOMapper representedDTOMapper(){return new RepresentedDTOMapper();}*/
 }
