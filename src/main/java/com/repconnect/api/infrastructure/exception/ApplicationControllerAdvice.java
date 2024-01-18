@@ -3,6 +3,7 @@ package com.repconnect.api.infrastructure.exception;
 import com.repconnect.api.core.exception.EntityAlreadyExistsException;
 import com.repconnect.api.core.exception.EntityNotFoundExceptions;
 import com.repconnect.api.core.exception.ErrorMessage;
+import com.repconnect.api.core.exception.IllegalArgumentExceptions;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,23 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.HashMap;
-import java.util.Map;
-
 @Slf4j
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
-
-    // This exception is typically thrown when there are validation errors on method arguments annotated with @Valid.
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<Map<String, String>> handleInvalidArgument(MethodArgumentNotValidException ex) {
-//        Map<String, String> errorMap = new HashMap<>();
-//        ex.getBindingResult().getFieldErrors().forEach(error -> {
-//            errorMap.put(error.getField(), error.getDefaultMessage());
-//        });
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
-//    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessage> methodArgumentNotValidException(MethodArgumentNotValidException ex,
@@ -61,8 +48,8 @@ public class ApplicationControllerAdvice {
 
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorMessage> illegalArgumentException(IllegalArgumentException ex,
+    @ExceptionHandler(IllegalArgumentExceptions.class)
+    public ResponseEntity<ErrorMessage> illegalArgumentException(IllegalArgumentExceptions ex,
                                                                  HttpServletRequest request
     ) {
         log.error("Api Error - ex");

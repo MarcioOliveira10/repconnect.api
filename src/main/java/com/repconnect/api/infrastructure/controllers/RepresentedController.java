@@ -1,6 +1,7 @@
 package com.repconnect.api.infrastructure.controllers;
 
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
+import com.repconnect.api.applicationn.useCase.represented.DeleteRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.UpdateRepresentedUseCase;
 import com.repconnect.api.core.domain.Represented;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,12 +25,17 @@ public class RepresentedController {
     private final GetAllRepresentedUseCase getAllRepresentedUseCase;
 
     private final UpdateRepresentedUseCase updateRepresentedUseCase;
+    private final DeleteRepresentedUseCase deleteRepresentedUseCase;
 
 
-    public RepresentedController(CreateRepresentedUseCase createRepresentedUseCase, GetAllRepresentedUseCase getAllRepresentedUseCase, UpdateRepresentedUseCase updateRepresentedUseCase) {
+    public RepresentedController(CreateRepresentedUseCase createRepresentedUseCase,
+                                 GetAllRepresentedUseCase getAllRepresentedUseCase,
+                                 UpdateRepresentedUseCase updateRepresentedUseCase,
+                                 DeleteRepresentedUseCase deleteRepresentedUseCase) {
         this.createRepresentedUseCase = createRepresentedUseCase;
         this.getAllRepresentedUseCase = getAllRepresentedUseCase;
         this.updateRepresentedUseCase = updateRepresentedUseCase;
+        this.deleteRepresentedUseCase = deleteRepresentedUseCase;
     }
 
     @PostMapping
@@ -53,6 +60,11 @@ public class RepresentedController {
         Represented represented = updateRepresentedUseCase.updateRepresented(representedBusinessObj);
         RepresentedResponse response = RepresentedDTOMapper.INSTANCE.toResponse(represented);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteRepresented(@PathVariable(value = "id") Integer id){
+         deleteRepresentedUseCase.deleteRepresentedUseCase(id);
+         return ResponseEntity.status(HttpStatus.OK).body("Represented deleted successfully.");
     }
 
 

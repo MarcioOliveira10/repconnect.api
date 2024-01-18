@@ -1,8 +1,8 @@
 package com.repconnect.api.core.exception;
 
-public class IllegalArgumentException extends RuntimeException{
+public class IllegalArgumentExceptions extends RuntimeException{
 
-    public IllegalArgumentException(String message){
+    public IllegalArgumentExceptions(String message){
         super(message);
     }
 }

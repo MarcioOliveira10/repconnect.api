@@ -11,4 +11,6 @@ public interface IRepresentedGateway {
     List<Represented> getAllRepresented();
 
     Represented updateRepresented(Represented represented);
+
+    void deleteById(Integer id);
 }

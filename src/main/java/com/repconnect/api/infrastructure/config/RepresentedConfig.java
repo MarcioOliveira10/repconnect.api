@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
+import com.repconnect.api.applicationn.useCase.represented.DeleteRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.UpdateRepresentedUseCase;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
@@ -14,6 +15,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RepresentedConfig {
+    @Bean
+    DeleteRepresentedUseCase deleteRepresentedUseCase(IRepresentedGateway iRepresentedGateway){
+        return new DeleteRepresentedUseCase(iRepresentedGateway);
+    }
     @Bean
     UpdateRepresentedUseCase updateRepresentedUseCase(IRepresentedGateway iRepresentedGateway){
         return new UpdateRepresentedUseCase(iRepresentedGateway);
