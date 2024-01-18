@@ -3,6 +3,7 @@ package com.repconnect.api.infrastructure.config;
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
+import com.repconnect.api.applicationn.useCase.represented.UpdateRepresentedUseCase;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
 import com.repconnect.api.infrastructure.gatewayImpl.PhoneRepositoryGateway;
 import com.repconnect.api.infrastructure.gatewayImpl.RepresentedRepositoryGateway;
@@ -13,6 +14,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RepresentedConfig {
+    @Bean
+    UpdateRepresentedUseCase updateRepresentedUseCase(IRepresentedGateway iRepresentedGateway){
+        return new UpdateRepresentedUseCase(iRepresentedGateway);
+    }
 
     @Bean
     GetAllRepresentedUseCase getAllRepresentedUseCase(IRepresentedGateway iRepresentedGateway){

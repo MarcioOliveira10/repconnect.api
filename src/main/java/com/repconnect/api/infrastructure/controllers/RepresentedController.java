@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.controllers;
 
 import com.repconnect.api.applicationn.useCase.represented.CreateRepresentedUseCase;
 import com.repconnect.api.applicationn.useCase.represented.GetAllRepresentedUseCase;
+import com.repconnect.api.applicationn.useCase.represented.UpdateRepresentedUseCase;
 import com.repconnect.api.core.domain.Represented;
 import com.repconnect.api.infrastructure.dto.represented.RepresentedDTOMapper;
 import com.repconnect.api.infrastructure.dto.represented.RepresentedRequest;
@@ -21,10 +22,13 @@ public class RepresentedController {
     private final CreateRepresentedUseCase createRepresentedUseCase;
     private final GetAllRepresentedUseCase getAllRepresentedUseCase;
 
+    private final UpdateRepresentedUseCase updateRepresentedUseCase;
 
-    public RepresentedController( CreateRepresentedUseCase createRepresentedUseCase, GetAllRepresentedUseCase getAllRepresentedUseCase) {
+
+    public RepresentedController(CreateRepresentedUseCase createRepresentedUseCase, GetAllRepresentedUseCase getAllRepresentedUseCase, UpdateRepresentedUseCase updateRepresentedUseCase) {
         this.createRepresentedUseCase = createRepresentedUseCase;
         this.getAllRepresentedUseCase = getAllRepresentedUseCase;
+        this.updateRepresentedUseCase = updateRepresentedUseCase;
     }
 
     @PostMapping
@@ -42,6 +46,13 @@ public class RepresentedController {
                 .map(RepresentedDTOMapper.INSTANCE::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(representedResponseList);
+    }
+    @PutMapping
+    public ResponseEntity<RepresentedResponse> updateRepresented(@RequestBody RepresentedRequest representedRequest){
+        Represented representedBusinessObj = RepresentedDTOMapper.INSTANCE.toRepresented(representedRequest);
+        Represented represented = updateRepresentedUseCase.updateRepresented(representedBusinessObj);
+        RepresentedResponse response = RepresentedDTOMapper.INSTANCE.toResponse(represented);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 

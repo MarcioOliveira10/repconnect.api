@@ -3,7 +3,9 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.core.domain.Represented;
 import com.repconnect.api.core.exception.EntityAlreadyExistsException;
+import com.repconnect.api.core.exception.EntityNotFoundExceptions;
 import com.repconnect.api.core.exception.IllegalArgumentException;
+import com.repconnect.api.infrastructure.entity.InvoiceDataEntity;
 import com.repconnect.api.infrastructure.entity.PhoneEntity;
 import com.repconnect.api.infrastructure.entity.RepresentedEntity;
 import com.repconnect.api.infrastructure.mapper.PhoneEntityMapper;
@@ -11,6 +13,7 @@ import com.repconnect.api.infrastructure.mapper.RepresentedMapper;
 import com.repconnect.api.infrastructure.repository.IRepresentedRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RepresentedRepositoryGateway implements IRepresentedGateway {
@@ -53,5 +56,24 @@ public class RepresentedRepositoryGateway implements IRepresentedGateway {
         return representedEntityList.stream()
                 .map(RepresentedMapper.INSTANCE::toRepresented)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Represented updateRepresented(Represented represented) {
+        Optional<RepresentedEntity> representedEntityOp = iRepresentedRepository.findById(represented.id());
+        if (representedEntityOp.isPresent()){
+            RepresentedEntity existingRepresentedEntity = representedEntityOp.get();
+            existingRepresentedEntity.setName(represented.name());
+            existingRepresentedEntity.setWebSite(represented.webSite());
+            existingRepresentedEntity.setEmail(represented.email());
+            existingRepresentedEntity.setAddress(represented.address());
+            existingRepresentedEntity.setPhones(represented.phones());
+            RepresentedEntity updateRepresented = iRepresentedRepository.save(existingRepresentedEntity);
+            return RepresentedMapper.INSTANCE.toRepresented(updateRepresented);
+
+        }else {
+            throw new EntityNotFoundExceptions("Entity not found");
+        }
+
     }
 }

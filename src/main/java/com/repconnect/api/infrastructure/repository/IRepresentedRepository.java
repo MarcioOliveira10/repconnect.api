@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IRepresentedRepository extends JpaRepository<RepresentedEntity, Integer> {
 //    @Query("SELECT r FROM Represented r WHERE r.name = :name")
@@ -16,5 +17,7 @@ public interface IRepresentedRepository extends JpaRepository<RepresentedEntity,
     }
     @Query("SELECT COUNT(r) > 0 FROM RepresentedEntity r WHERE TRIM(r.name) = TRIM(:name)")
     boolean existsByName(String name);
+
+   // Optional<RepresentedEntity> findById(Integer id);
 
 }

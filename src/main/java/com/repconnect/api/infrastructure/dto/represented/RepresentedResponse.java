@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record RepresentedResponse(
+        Integer id,
         String name,
         String webSite,
         String email,
@@ -16,4 +17,5 @@ public record RepresentedResponse(
         LocalDateTime updatedAt
 
 ) {
+
 }

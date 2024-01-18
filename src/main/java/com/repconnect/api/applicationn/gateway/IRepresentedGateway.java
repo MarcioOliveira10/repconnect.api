@@ -9,4 +9,6 @@ public interface IRepresentedGateway {
     Represented createRepresented(Represented represented);
 
     List<Represented> getAllRepresented();
+
+    Represented updateRepresented(Represented represented);
 }
