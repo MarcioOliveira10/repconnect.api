@@ -1,6 +1,6 @@
 package com.repconnect.api.core.domain;
 
-public enum TipOfUser {
+public enum TypeOfUser {
     SELLER,
     ADMIN,
     SUPER_ADMIN,
