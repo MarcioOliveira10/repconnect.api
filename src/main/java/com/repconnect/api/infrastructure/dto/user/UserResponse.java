@@ -7,6 +7,7 @@ import com.repconnect.api.infrastructure.entity.PhoneEntity;
 import java.time.LocalDateTime;
 
 public record UserResponse(
+        Integer id,
         String name,
         String email,
         PhoneEntity phone,

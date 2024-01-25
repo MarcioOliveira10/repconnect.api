@@ -2,7 +2,6 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 
 import com.repconnect.api.applicationn.gateway.IUserGateway;
 import com.repconnect.api.core.domain.User;
-import com.repconnect.api.core.exception.EntityAlreadyExistsException;
 import com.repconnect.api.core.exception.IllegalArgumentExceptions;
 import com.repconnect.api.infrastructure.entity.UserEntity;
 import com.repconnect.api.infrastructure.mapper.UserMapper;

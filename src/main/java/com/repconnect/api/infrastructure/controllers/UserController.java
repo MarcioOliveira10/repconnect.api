@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final CreateUserUseCase createUserUseCase;
 
-    public UserController(CreateUserUseCase createUserUseCase) {
+   public UserController(CreateUserUseCase createUserUseCase) {
         this.createUserUseCase = createUserUseCase;
     }
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest userRequest){
-        User userBusinessObj = UserDTOMapper.INSTANCE.toUser(userRequest);
+        User userBusinessObj = UserDTOMapper.toUser(userRequest);
         User user = createUserUseCase.createUser(userBusinessObj);
-        UserResponse userResponse = UserDTOMapper.INSTANCE.toResponse(user);
+        UserResponse userResponse = UserDTOMapper.toResponse(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 

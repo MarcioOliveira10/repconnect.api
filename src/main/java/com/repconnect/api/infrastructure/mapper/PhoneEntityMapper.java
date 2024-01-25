@@ -32,7 +32,7 @@ public class PhoneEntityMapper {
                 phoneEntity.getName(),
                 toRepresented(phoneEntity.getRepresented()),
                 phoneEntity.getCreatedAt(),
-                phoneEntity.getUpdateAt()
+                phoneEntity.getUpdatedAt()
         );
     }
 

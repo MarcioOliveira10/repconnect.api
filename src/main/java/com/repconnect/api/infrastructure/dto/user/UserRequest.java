@@ -4,7 +4,10 @@ import com.repconnect.api.core.domain.TypeOfUser;
 import com.repconnect.api.infrastructure.entity.AddressEntity;
 import com.repconnect.api.infrastructure.entity.PhoneEntity;
 
+import java.time.LocalDateTime;
+
 public record UserRequest(
+        Integer id,
         String name,
         String email,
         PhoneEntity phone,
@@ -12,6 +15,8 @@ public record UserRequest(
         TypeOfUser typeOfUser,
         String password,
         String activationKey,
-        String rememberToken
+        String rememberToken,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }

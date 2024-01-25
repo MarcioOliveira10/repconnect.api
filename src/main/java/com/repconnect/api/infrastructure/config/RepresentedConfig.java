@@ -41,6 +41,4 @@ public class RepresentedConfig {
             PhoneEntityMapper phoneEntityMapper){
         return new RepresentedRepositoryGateway(iRepresentedRepository,phoneRepositoryGateway, phoneEntityMapper);
     }
-   /* @Bean
-   RepresentedDTOMapper representedDTOMapper(){return new RepresentedDTOMapper();}*/
 }

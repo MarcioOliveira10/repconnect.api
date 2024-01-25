@@ -17,7 +17,6 @@ public class AddressEntity {
     @Column(name="zip_code")
     private String zipCode;
     private String complement;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
