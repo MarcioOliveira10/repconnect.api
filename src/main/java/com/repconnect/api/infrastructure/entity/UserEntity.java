@@ -1,5 +1,6 @@
 package com.repconnect.api.infrastructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.repconnect.api.core.domain.Phone;
 import com.repconnect.api.core.domain.TypeOfUser;
 import jakarta.persistence.*;
@@ -27,6 +28,8 @@ public class UserEntity {
     private AddressEntity address;
 
     @Column(name = "type_of_user")
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("TypeOfUser")
     private TypeOfUser typeOfUser;
     private String password;
     @Column(name = "activation_key")
