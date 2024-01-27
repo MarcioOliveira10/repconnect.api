@@ -4,4 +4,6 @@ import com.repconnect.api.infrastructure.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
+
+    boolean existsByNameOrEmail(String name, String email);
 }

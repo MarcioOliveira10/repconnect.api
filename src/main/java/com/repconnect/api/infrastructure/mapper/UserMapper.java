@@ -21,8 +21,6 @@ public abstract class UserMapper {
     @Mapping(target = "phone", qualifiedByName = "mapPhoneToPhoneEntity")
     public abstract UserEntity toUserEntity(User user);
 
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
     public abstract User toUser(UserEntity userEntity);
 
      @Named("mapPhoneToPhoneEntity")

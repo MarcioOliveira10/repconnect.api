@@ -17,6 +17,9 @@ public class UserRepositoryGateway implements IUserGateway {
 
     @Override
     public User createUser(User user) {
+        if(iUserRepository.existsByNameOrEmail(user.name(),user.email())){
+            throw new IllegalArgumentExceptions(("User with the same name or email already exists"));
+        }
         UserEntity userEntity = UserMapper.INSTANCE.toUserEntity(user);
         try {
             UserEntity savedUserEntity = iUserRepository.save(userEntity);
