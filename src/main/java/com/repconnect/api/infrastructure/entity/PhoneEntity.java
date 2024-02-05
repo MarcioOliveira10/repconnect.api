@@ -2,8 +2,6 @@ package com.repconnect.api.infrastructure.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -56,6 +54,11 @@ public class PhoneEntity {
     public void createData(){
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        setUpdatedAt(LocalDateTime.now());
     }
 
     public Integer getId() {

@@ -2,10 +2,12 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 
 import com.repconnect.api.applicationn.gateway.IUserGateway;
 import com.repconnect.api.core.domain.User;
+import com.repconnect.api.core.exception.EntityNotFoundExceptions;
 import com.repconnect.api.core.exception.IllegalArgumentExceptions;
 import com.repconnect.api.infrastructure.entity.UserEntity;
 import com.repconnect.api.infrastructure.mapper.UserMapper;
 import com.repconnect.api.infrastructure.repository.IUserRepository;
+import static com.repconnect.api.infrastructure.util.UserUtil.updateEntityFields;
 
 public class UserRepositoryGateway implements IUserGateway {
 
@@ -29,4 +31,18 @@ public class UserRepositoryGateway implements IUserGateway {
             throw new IllegalArgumentExceptions("Error saving User");
         }
     }
+
+    @Override
+    public User updateUser(User user) {
+      if(user == null || user.id() == null){
+          throw new IllegalArgumentExceptions("The 'User' parameter or its ID cannot be null.");
+      }
+      UserEntity existingUserEntity = iUserRepository.findById(user.id())
+                      .orElseThrow(() -> new EntityNotFoundExceptions("Entity not found"));
+      updateEntityFields(existingUserEntity, user);
+      UserEntity updateUser = iUserRepository.save(existingUserEntity);
+      return UserMapper.INSTANCE.toUser(updateUser);
+    }
+
+
 }

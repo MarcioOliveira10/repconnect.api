@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.repconnect.api.core.domain.Phone;
 import com.repconnect.api.core.domain.TypeOfUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -71,13 +72,13 @@ public class UserEntity {
         this.updatedAt = updatedAt;
     }
     @PrePersist
-    protected void OnCreate(){
+    protected void onCreate(){
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
     @PreUpdate
     protected void onUpdate(){
-        updatedAt = LocalDateTime.now();
+        setUpdatedAt(LocalDateTime.now());
     }
 
     public Integer getId() {

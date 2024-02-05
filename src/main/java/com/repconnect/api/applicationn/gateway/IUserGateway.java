@@ -5,4 +5,6 @@ import com.repconnect.api.core.domain.User;
 public interface IUserGateway {
 
     User createUser(User user);
+
+    User updateUser(User user);
 }

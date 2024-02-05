@@ -1,6 +1,7 @@
 package com.repconnect.api.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.repconnect.api.core.exception.IllegalArgumentExceptions;
 
@@ -15,7 +16,7 @@ public enum TypeOfUser {
      TypeOfUser(String value){
         this.value = value;
     }
-
+    @JsonValue
     public String getValue() {
         return this.name().toLowerCase();
     }

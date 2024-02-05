@@ -31,8 +31,8 @@ public class AddressEntity {
         this.city = city;
         this.zipCode = zipCode;
         this.complement = complement;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public AddressEntity(String street, String number, String city, String zipCode,
@@ -42,13 +42,17 @@ public class AddressEntity {
         this.city = city;
         this.zipCode = zipCode;
         this.complement = complement;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt = createdAt;
+        this.createdAt = updatedAt;
     }
     @PrePersist
-    protected void OnCreate(){
+    protected void onCreate(){
         createdAt= LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        setUpdatedAt(LocalDateTime.now());
     }
 
     public AddressEntity() {
@@ -109,7 +113,7 @@ public class AddressEntity {
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
@@ -117,7 +121,7 @@ public class AddressEntity {
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = updatedAt;
     }
 
     //toString

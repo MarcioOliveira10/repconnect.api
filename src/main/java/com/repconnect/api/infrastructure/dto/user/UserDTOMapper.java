@@ -69,7 +69,7 @@ public class UserDTOMapper {
                 phone.name(),
                 null,
                 phone.createdAt(),
-                null
+                phone.updatedAt()
         );
 
     }
@@ -85,8 +85,8 @@ public class UserDTOMapper {
                 addressEntity.getCity(),
                 addressEntity.getZipCode(),
                 addressEntity.getComplement(),
-                null,
-                null
+                addressEntity.getCreatedAt(),
+                addressEntity.getUpdatedAt()
         );
     }
     private static AddressEntity mapAddressToAddressEntity(Address address){
