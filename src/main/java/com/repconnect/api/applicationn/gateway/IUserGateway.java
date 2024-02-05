@@ -7,4 +7,6 @@ public interface IUserGateway {
     User createUser(User user);
 
     User updateUser(User user);
+
+    void deleteById(Integer id);
 }

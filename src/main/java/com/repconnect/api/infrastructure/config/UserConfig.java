@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.config;
 
 import com.repconnect.api.applicationn.gateway.IUserGateway;
 import com.repconnect.api.applicationn.useCase.user.CreateUserUseCase;
+import com.repconnect.api.applicationn.useCase.user.DeleteUserUseCase;
 import com.repconnect.api.applicationn.useCase.user.UpdateUserUseCase;
 import com.repconnect.api.infrastructure.gatewayImpl.UserRepositoryGateway;
 import com.repconnect.api.infrastructure.repository.IUserRepository;
@@ -11,6 +12,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UserConfig {
+    @Bean
+    DeleteUserUseCase deleteUserUseCase(IUserGateway iUserGateway){
+        return new DeleteUserUseCase(iUserGateway);
+    }
     @Bean
     TypeOfUserDeserializer typeOfUserDeserializer(){
         return new TypeOfUserDeserializer();

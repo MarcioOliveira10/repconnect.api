@@ -44,5 +44,14 @@ public class UserRepositoryGateway implements IUserGateway {
       return UserMapper.INSTANCE.toUser(updateUser);
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        if(iUserRepository.existsById(id)){
+            iUserRepository.deleteById(id);
+        }else {
+            throw new EntityNotFoundExceptions("Entity not found with ID: " + id);
+        }
+    }
+
 
 }
