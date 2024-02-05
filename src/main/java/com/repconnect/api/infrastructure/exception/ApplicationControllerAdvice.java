@@ -1,9 +1,6 @@
 package com.repconnect.api.infrastructure.exception;
 
-import com.repconnect.api.core.exception.EntityAlreadyExistsException;
-import com.repconnect.api.core.exception.EntityNotFoundExceptions;
-import com.repconnect.api.core.exception.ErrorMessage;
-import com.repconnect.api.core.exception.IllegalArgumentExceptions;
+import com.repconnect.api.core.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +18,7 @@ public class ApplicationControllerAdvice {
     public ResponseEntity<ErrorMessage> methodArgumentNotValidException(MethodArgumentNotValidException ex,
                                                                         HttpServletRequest request,
                                                                         BindingResult result) {
-        log.error("Api Error - ex");
+        log.error("Api Error", ex);
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -31,7 +28,7 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(EntityAlreadyExistsException.class)
     public ResponseEntity<ErrorMessage> entityAlreadyExistsException(EntityAlreadyExistsException ex,
                                                                      HttpServletRequest request) {
-        log.error("Api Error - ex");
+        log.error("Api Error", ex);
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -41,7 +38,7 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(EntityNotFoundExceptions.class)
     public ResponseEntity<ErrorMessage> entityNotFoundExceptions(EntityNotFoundExceptions ex,
                                                                  HttpServletRequest request) {
-        log.error("Api Error - ex");
+        log.error("Api Error", ex);
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
@@ -52,10 +49,21 @@ public class ApplicationControllerAdvice {
     public ResponseEntity<ErrorMessage> illegalArgumentException(IllegalArgumentExceptions ex,
                                                                  HttpServletRequest request
     ) {
-        log.error("Api Error - ex");
+        log.error("Api Error", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
+
+    }
+
+    @ExceptionHandler(DataAccessRuntimeException.class)
+    public ResponseEntity<ErrorMessage> dataAccessRuntimeException(DataAccessRuntimeException ex,
+                                                                   HttpServletRequest request)
+    {
+        log.error("Api Error", ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, ex.getMessage()));
 
     }
 }

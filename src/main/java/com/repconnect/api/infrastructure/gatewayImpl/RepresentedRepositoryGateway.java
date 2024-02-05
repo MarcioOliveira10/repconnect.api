@@ -2,6 +2,7 @@ package com.repconnect.api.infrastructure.gatewayImpl;
 
 import com.repconnect.api.applicationn.gateway.IRepresentedGateway;
 import com.repconnect.api.core.domain.Represented;
+import com.repconnect.api.core.exception.DataAccessRuntimeException;
 import com.repconnect.api.core.exception.EntityAlreadyExistsException;
 import com.repconnect.api.core.exception.EntityNotFoundExceptions;
 import com.repconnect.api.core.exception.IllegalArgumentExceptions;
@@ -52,10 +53,15 @@ public class RepresentedRepositoryGateway implements IRepresentedGateway {
 
     @Override
     public List<Represented> getAllRepresented() {
-        List<RepresentedEntity> representedEntityList = iRepresentedRepository.findAll();
-        return representedEntityList.stream()
-                .map(RepresentedMapper.INSTANCE::toRepresented)
-                .collect(Collectors.toList());
+        try{
+            List<RepresentedEntity> representedEntityList = iRepresentedRepository.findAll();
+            return representedEntityList.stream()
+                    .map(RepresentedMapper.INSTANCE::toRepresented)
+                    .collect(Collectors.toList());
+        }catch (DataAccessRuntimeException ex){
+            ex.printStackTrace();
+            throw new DataAccessRuntimeException("Error accessing data", ex);
+        }
     }
 
     @Override
